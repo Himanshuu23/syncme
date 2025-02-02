@@ -1,0 +1,20 @@
+# Node.js
+/node_modules
+/package-lock.json
+
+# Truffle build artifacts
+/build
+/.build
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Compiled files
+*.tflite
+
+# System files
+.DS_Store
+Thumbs.db
