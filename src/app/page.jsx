@@ -6,7 +6,7 @@ import Bg from "./Components/Bg";
 export default function Home() {
   return (
     <>
-    <Bg />
+    <div className="text-white">hello world</div>
     </>
   );
 }
