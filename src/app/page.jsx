@@ -4,6 +4,8 @@ import { Activity, Flame, FootprintsIcon } from 'lucide-react';
 import Graph from "@/components/Graph"
 import FoodTrackingList from "@/components/FoodTrackingList";
 import Schedule from "@/components/Schedule";
+import Goals from "@/components/Goals";
+import Membership from "@/components/Membership";
 export default function Home() {
   return (
     <>
@@ -41,8 +43,14 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="col-span-1">
+        <div className="col-span-1 mr-3 xl:mt-7">
           <Schedule/>
+          <div className="mt-5">
+            <Goals/>
+          </div>
+          <div className="mt-5  mr-2 ">
+            <Membership/>
+          </div>
         </div>
       </div>
 
