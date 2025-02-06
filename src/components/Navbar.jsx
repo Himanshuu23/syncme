@@ -15,7 +15,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <>
       {/* Sidebar Component */}
-      {isSidebarOpen && <Sidebar />}
+      {isSidebarOpen && <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />}
       <nav className={`
         fixed top-0 right-0 h-16
         ${isSidebarOpen ? 'lg:w-[calc(100%-260px)]' : 'w-full'}
@@ -25,8 +25,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         bg-[#0E071D]
         bg-opacity-70
         backdrop-blur-xl
-        shadow-xl
-        z-20
+        shadow-xlx
+        z-50
       `}>
         {/* Hamburger Menu Button */}
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2">

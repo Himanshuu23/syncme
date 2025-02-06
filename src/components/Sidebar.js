@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   ];
 
   return (
-    <div className={`w-64 h-screen border-r-2 bg-transparent backdrop-blur-sm shadow-lg ${isOpen ? 'block' : 'hidden'} flex flex-col justify-between`}>
+    <div className={`w-2/12   absolute  h-screen border-r-2 bg-transparent backdrop-blur-sm shadow-lg ${isOpen ? 'block' : 'hidden'} flex flex-col justify-between`}>
       <div className="p-4">
         <div className="border-b-2">
           <div className="flex items-center mb-8 justify-self-center">
