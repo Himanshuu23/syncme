@@ -18,7 +18,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
       {isSidebarOpen && <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />}
       <nav className={`
         fixed top-0 right-0 h-16
-        ${isSidebarOpen ? 'lg:w-[calc(100%-260px)]' : 'w-full'}
+        ${isSidebarOpen ? 'lg:w-[calc(100%-16.6666667%)]' : 'w-full'}
         transition-all duration-300 ease-in-out
          px-4 py-2
         flex items-center justify-between
