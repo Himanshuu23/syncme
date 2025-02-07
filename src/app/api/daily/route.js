@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/mongodb";
+import { connectDB } from "@/lib/connectdb";
 import { DailyData } from "@/models/daily";
 import { NextResponse } from "next/server";
 

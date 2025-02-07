@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/mongodb";
+import { connectDB } from "@/lib/connectdb";
 import { MentalMetrics } from "@/models/mentalmetrics";
 import { NextResponse } from "next/server";
 
