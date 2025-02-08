@@ -15,6 +15,9 @@ export async function GET(req) {
 export async function POST(req) {
     await dbConnect();
     try {
+        const existingUser = await User.findOne({ email: data.email });
+        if (existingUser) return NextResponse.json({ error: "User already exists" }, { status: 400 });
+        
         const data = await req.json();
         if (!data.name || !data.age || !data.email) {
             return NextResponse.json({ error: "Name, age, and email are required" }, { status: 400 });

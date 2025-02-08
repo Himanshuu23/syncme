@@ -16,6 +16,9 @@ export async function GET(req) {
 export async function POST(req) {
     await dbConnect();
     try {
+        const existingMentalMetrics = await MentalMetrics.findOne({ email: data.email });
+        if (existingMentalMetrics) return NextResponse.json({ error: "Mental metrics data already exists" }, { status: 400 });
+
         const data = await req.json();
         if (!data.email) return NextResponse.json({ error: "Email is required" }, { status: 400 });
         const user = await User.findOne({ email: data.email });

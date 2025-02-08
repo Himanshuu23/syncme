@@ -6,6 +6,9 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
     await dbConnect();
     try {
+        const existingAnalytics = await Analytics.findOne({ email: data.email });
+        if (existingAnalytics) return NextResponse.json({ error: "Analytics data already exists" }, { status: 400 });
+
         const data = await req.json();
         if (!data.email) return NextResponse.json({ error: "Email is required" }, { status: 400 });
 

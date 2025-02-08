@@ -21,6 +21,9 @@ export async function GET(req) {
 export async function POST(req) {
     await dbConnect();
     try {
+        const existingDailyData = await DailyData.findOne({ email: data.email });
+        if (existingDailyData) return NextResponse.json({ error: "Daily data already exists" }, { status: 400 });
+
         const data = await req.json();
         if (!data.email || !data.sleep) return NextResponse.json({ error: "Email and sleep data are required" }, { status: 400 });
 
