@@ -20,7 +20,7 @@ const AnimatedListItem = ({ children }) => {
 };
 
 // AnimatedList Component
-const AnimatedList = React.memo(({ children, className = "", delay = 20000, ...props }) => {
+const AnimatedList = React.memo(({ children, className = "", delay = 2000, ...props }) => {
   const [index, setIndex] = useState(0);
   const childrenArray = useMemo(() => React.Children.toArray(children), [children]);
 
@@ -29,7 +29,14 @@ const AnimatedList = React.memo(({ children, className = "", delay = 20000, ...p
       const timeout = setTimeout(() => {
         setIndex((prevIndex) => prevIndex + 1);
       }, delay);
-
+      
+      return () => clearTimeout(timeout);
+    } else {
+      // Reset index to loop through notifications
+      const timeout = setTimeout(() => {
+        setIndex(0);
+      }, delay);
+      
       return () => clearTimeout(timeout);
     }
   }, [index, delay, childrenArray.length]);

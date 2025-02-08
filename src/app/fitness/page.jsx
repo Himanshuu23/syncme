@@ -13,7 +13,7 @@ const page = () => {
                     <CameraComponent />
                 </div>
 
-                <div className="flex justify-center w-full">
+                <div className="flex justify-center ml-3 w-full">
                     <div className="col-span-3 -ml-9 scale-90 grid grid-cols-2 gap-4 p-4 bg-transparent">
                         <Fitness_stats
                             icon={Activity}
@@ -40,7 +40,7 @@ const page = () => {
                             color="bg-purple-500"
                         />
                     </div>
-                    <div className="mt-6">
+                    <div className="mt-6 ">
                         <AnimatedListDemo />
                     </div>
                 </div>
