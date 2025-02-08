@@ -1,6 +1,6 @@
 import { dbConnect } from "@/libs/connectdb";
 import { Analytics } from "@/models/analytics";
-import { User } from "@/models/user";
+import User from "@/models/user";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {

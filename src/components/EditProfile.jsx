@@ -36,27 +36,48 @@ const EditProfile = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSaving(true);
-    const data = new FormData();
+
+    const updatedData = {};
     Object.entries(formData).forEach(([key, value]) => {
-      data.append(key, value);
+        if (
+            value !== undefined &&
+            value !== null &&
+            ["fullName", "secondaryEmail", "email", "phoneNumber", "country", "state", "zipCode"].includes(key)
+        ) {
+            updatedData[key] = typeof value === "string" ? value.trim() : value;
+        }
     });
 
-    console.log('Form Data:', Object.fromEntries(data.entries()));
+    console.log('Updated Data:', updatedData);
 
-    if (profileImage) {
-      console.log('Profile Image:', profileImage);
+    try {
+        const response = await fetch('/api/user', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            console.log('User updated successfully:', result);
+            alert('Profile updated successfully!');
+        } else {
+            console.error('Error updating profile:', result.error);
+            alert(`Error: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+        alert('Failed to update profile');
+    } finally {
+        setTimeout(() => setIsSaving(false), 2000);
     }
-
-    setTimeout(() => {
-      setIsSaving(false);
-    }, 2000);
-
-    // Call your API here with the FormData object
-    // Example: axios.post('/api/endpoint', data)
-  };
+};
+ 
 
   return (
     <form onSubmit={handleSubmit}>

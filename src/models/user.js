@@ -6,10 +6,18 @@ const UserSchema = new mongoose.Schema({
     age: { type: Number, required: true },
     profession: { type: String },
     email: { type: String, required: true, unique: true },
-    mobile: { type: Number },
+    secondaryEmail: { type: String, unique: true },
+    phoneNumber: { type: Number },
     gender: { type: String, enum: ["M", "F", "O"] },
     weight: { type: Number },
-    height: { type: Number }
+    height: { type: Number },
+    country: { type: String },
+    region: { type: String },
+    state: { type: String },
+    zipCode: { type: String },
+    profilePicture: { type: String }
 });
 
-export const User = mongoose.model("User", UserSchema);
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
+
+export default User;
