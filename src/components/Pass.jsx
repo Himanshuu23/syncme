@@ -34,16 +34,40 @@ const EditProfile = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Prepare data for API call
-    const data = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      data.append(key, value);
-    });
-
-    console.log('Form Data:', Object.fromEntries(data.entries()));
-
+  
+    if (formData.newPassword !== formData.confirmPassword) {
+      alert("New password and confirm password do not match");
+      return;
+    }
+  
+    console.log('Form Data:', formData);
+  
+    try {
+      const response = await fetch("/api/user", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "def@email.com", 
+          newPassword: formData.newPassword,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to update password");
+      }
+  
+      alert("Password updated successfully");
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error.message);
+    }
+  
     // Simulate saving and trigger animation
     setIsSaving(true);
     setTimeout(() => {
@@ -51,7 +75,7 @@ const EditProfile = () => {
       setIsSaved(true);
       setTimeout(() => setIsSaved(false), 2000);
     }, 1000);
-  };
+  };  
 
   return (
     <form onSubmit={handleSubmit}>
