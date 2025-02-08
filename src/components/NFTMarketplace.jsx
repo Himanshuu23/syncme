@@ -8,7 +8,7 @@ import { ethers } from 'ethers';
 const ITEMS = [
   {
     id: 1,
-    image: "/api/placeholder/400/400",
+    image: "https://i.insider.com/5b2bf9281ae6621e008b46c1?width=700",
     price: 0.0500,
     likes: 341,
     type: "hoodie"
@@ -106,7 +106,7 @@ const NFTMarketplace = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gray-900 p-8">
+    <div className="min-h-screen w-[70vw] p-8">
       <h1 className="text-white text-4xl font-bold mb-8">REDEEM ITEMS</h1>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -115,24 +115,24 @@ const NFTMarketplace = () => {
             key={item.id}
             className="bg-gray-800 rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
           >
-            <div className="relative">
+            <div className="relative p-4 ">
               <img
                 src={item.image}
                 alt={`Item ${item.id}`}
-                className="w-full h-64 object-cover"
+                className="w-full h-64 object-cover rounded-md"
               />
               <button
                 onClick={() => toggleLike(item.id)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+                className="absolute top-4 right-4 p-2 rounded-md overflow-hidden bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
               >
                 <Heart
-                  className={`w-6 h-6 transition-colors duration-300 ${
+                  className={`w-6 h-6 mr-8 transition-colors duration-300 ${
                     likedItems.has(item.id) 
                       ? 'text-red-500 fill-red-500' 
                       : 'text-white'
                   }`}
                 />
-                <span className="ml-1 text-white absolute right-0 top-0 -mt-1 -mr-1">
+                <span className="ml-1 text-white absolute right-0 top-0 mt-2 mr-2">
                   {item.likes}
                 </span>
               </button>
@@ -140,7 +140,7 @@ const NFTMarketplace = () => {
 
             <div className="p-4">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-white font-medium">{item.price} ETH</span>
+                <span className="text-white align-center font-sans font-medium">{item.price} ETH</span>
               </div>
               <ConnectWallet />
               <button onClick={() => buyProduct(1, item.price)} className="w-full bg-orange-500 text-white py-3 px-4 rounded-md font-medium transition-all duration-300 hover:bg-orange-600 active:scale-95">

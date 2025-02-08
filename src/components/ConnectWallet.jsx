@@ -22,7 +22,7 @@ export default function ConnectWallet() {
   return (
     <div>
       <button onClick={connectWallet}>
-        {walletAddress ? null : "Connect MetaMask to buy"}
+        {walletAddress ? null : ""}
       </button>
     </div>
   );
