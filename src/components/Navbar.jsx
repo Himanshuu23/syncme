@@ -8,9 +8,11 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { GoSidebarCollapse, GoSidebarExpand } from 'react-icons/go';
 import Image from 'next/image';
 import Sidebar from './Sidebar';
+import Dropdown from './Dropdown'
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
     <>
@@ -62,7 +64,12 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <button className="p-2 hover:bg-[#2D303E] rounded-lg">
             <IoSettingsOutline className="text-white text-xl" />
           </button>
-          <div className="h-10 w-10 rounded-full overflow-hidden">
+          <div 
+            className="h-10 w-10 rounded-full overflow-hidden cursor-pointer" 
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
             <img
               src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
               alt="Profile"
@@ -71,6 +78,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               className="object-cover"
             />
           </div>
+          {isDropdownOpen && <Dropdown isOpen={isDropdownOpen} setIsOpen={setIsDropdownOpen} />}
         </div>
       </nav>
     </>
