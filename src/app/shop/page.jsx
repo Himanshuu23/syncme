@@ -2,7 +2,7 @@ import React from 'react'
 import NFTMarketplace from '@/components/NFTMarketplace'
 const page = () => {
   return (
-    <div>
+    <div className="mx-auto mt-10">
         <NFTMarketplace/>
     </div>
   )
