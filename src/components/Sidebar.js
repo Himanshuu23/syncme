@@ -35,7 +35,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           </div>
         </div>
         
-        <nav className="mt-5">
+        <nav className="mt-5 text-black">
           {topMenuItems.map((item, index) => (
             <Link 
               key={index}
@@ -49,7 +49,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </nav>
       </div>
       
-      <div className="p-4 ">
+      <div className="p-4 text-black
+       ">
         {bottomMenuItems.map((item, index) => (
           <Link 
             key={index}
