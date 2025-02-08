@@ -1,55 +1,97 @@
-"use client";
-
-import { useRef, useEffect } from "react";
+"use client"
+import React, { useRef, useEffect, useState } from 'react';
+import { Camera, CameraOff } from 'lucide-react';
 
 export default function CameraComponent() {
   const videoRef = useRef(null);
-  const showBtnRef = useRef(null);
+  const [isCameraOn, setIsCameraOn] = useState(false);
+  const [stream, setStream] = useState(null);
 
-  // Function to show the camera
-  const showCamera = async () => {
+  // Function to handle camera toggle
+  const toggleCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
+      if (!isCameraOn) {
+        const newStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        if (videoRef.current) {
+          videoRef.current.srcObject = newStream;
+          setStream(newStream);
+          setIsCameraOn(true);
+        }
+      } else {
+        if (stream) {
+          stream.getTracks().forEach(track => track.stop());
+          if (videoRef.current) {
+            videoRef.current.srcObject = null;
+          }
+          setStream(null);
+        }
+        setIsCameraOn(false);
       }
     } catch (error) {
-      console.error("There is an error accessing the camera:", error);
+      console.error("Camera access error:", error);
       alert("Unable to access the camera. Please grant permission.");
     }
   };
 
-  // Attach event listener on component mount
+  // Cleanup on unmount
   useEffect(() => {
-    const showBtn = showBtnRef.current;
-    if (showBtn) {
-      showBtn.addEventListener("click", showCamera);
-    }
     return () => {
-      if (showBtn) {
-        showBtn.removeEventListener("click", showCamera);
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
       }
     };
-  }, []);
+  }, [stream]);
 
   return (
-    <div style={{ textAlign: "center", color: "white" }}>
-      <h1>Camera Access Component</h1>
-      <video
-        ref={videoRef}
-        style={{
-          width: "100%",
-          maxWidth: "500px",
-          backgroundColor: "black",
-          transform: "scaleX(-1)",
-        }}
-        autoPlay
-        playsInline
-        muted
-      />
-      <button ref={showBtnRef} style={{ marginTop: "20px", padding: "10px", zIndex: 1 }}>
-        Show Camera
-      </button>
-    </div>
+    
+      <div className="relative w-full max-w-2xl mx-auto">
+        {/* Video Container */}
+        <div className="relative aspect-video  w-[800px] rounded-lg overflow-hidden bg-gray-800 shadow-lg">
+          <video
+            ref={videoRef}
+            className={`w-full h-full object-cover transform scale-x-[-1] transition-opacity duration-300 ${
+              isCameraOn ? 'opacity-100' : 'opacity-0'
+            }`}
+            autoPlay
+            playsInline
+            muted
+          />
+          
+          {/* Camera Off Placeholder */}
+          {!isCameraOn && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-gray-400 mb-5 text-lg">Camera is off</div>
+            </div>
+          )}
+
+          {/* Controls Bar */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+            <div className="flex items-center justify-center space-x-4">
+              <button
+                onClick={toggleCamera}
+                className={`p-4 rounded-full  transition-all duration-300 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 ${
+                  isCameraOn 
+                    ? 'bg-gray-100 hover:bg-gray-200 text-gray-900' 
+                    : 'bg-red-500 hover:bg-red-600 text-white'
+                }`}
+              >
+                {isCameraOn ? (
+                  <Camera className="w-6 h-6" />
+                ) : (
+                  <CameraOff className="w-6 h-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Status Text */}
+        {/* <div className="mt-4 text-center">
+          <p className="text-gray-400 text-sm">
+            {isCameraOn ? 'Camera is active' : 'Camera is disabled'}
+          </p>
+        </div> */}
+      </div>
+
   );
 }
