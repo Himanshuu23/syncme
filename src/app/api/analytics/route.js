@@ -1,9 +1,9 @@
-import { connectDB } from "@/lib/connectdb";
+import { dbConnect } from "@/libs/connectdb";
 import { Analytics } from "@/models/analytics";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    await connectDB();
+    await dbConnect();
     const analyticsData = await Analytics.find();
     return NextResponse.json(analyticsData);
 }

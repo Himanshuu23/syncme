@@ -1,9 +1,9 @@
-import { connectDB } from "@/lib/connectdb";
+import { dbConnect } from "@/libs/connectdb";
 import { MentalMetrics } from "@/models/mentalmetrics";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    await connectDB();
+    await dbConnect();
     const metrics = await MentalMetrics.find();
     return NextResponse.json(metrics);
 }
