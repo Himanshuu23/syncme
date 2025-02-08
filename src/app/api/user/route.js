@@ -66,3 +66,44 @@ export async function PATCH(req) {
         return NextResponse.json({ error: error.message }, { status: 400 });
     }
 }
+
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    await dbConnect();
+
+    const { email, rewardId } = req.body;
+
+    if (!email || !rewardId) return res.status(400).json({ error: "Missing parameters" });
+
+    const reward = await Rewards.findById(rewardId);
+    if (!reward) return res.status(404).json({ error: "Reward not found" });
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    user.coins = (user.coins || 0) + reward.coins;
+    user.xp = (user.xp || 0) + reward.xp;
+    user.amount = (user.amount || 0) + reward.coins;
+    user.lastUpdated = new Date();
+    await user.save();
+
+    reward.completed = 100;
+    await reward.save();
+
+    return res.status(200).json({ success: true, message: "Reward claimed successfully" });
+  }
+
+  if (req.method === "GET") {
+    await dbConnect();
+    
+    const { email } = req.query;
+    if (!email) return res.status(400).json({ error: "Missing email parameter" });
+    
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: "User not found" });
+    
+    return res.status(200).json({ coins: user.coins, lastUpdated: user.lastUpdated });
+  }
+
+  res.status(405).end();
+}
