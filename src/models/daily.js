@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const DailyDataSchema = new mongoose.Schema({
-    userId: { type: Number, ref: "User", required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    email: { type: String, required: true, unique: true },
     sleep: { type: Number, required: true },
     physicalActivity: { type: Number },
     productivity: { type: Number },

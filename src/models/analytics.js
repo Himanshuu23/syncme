@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const AnalyticsSchema = new mongoose.Schema({
-    id: { type: Number, required: true, unique: true },
-    userId: { type: Number, ref: "User", required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    email: { type: String, required: true, unique: true },
     calories: { type: Number },
     intensity: { type: Number },
     duration: { type: String },

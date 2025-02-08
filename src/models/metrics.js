@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+
 const MetricsSchema = new mongoose.Schema({
-    userId: { type: Number, ref: "User", required: true }, // Foreign key reference
+    userId: { type: Number, ref: "User", required: true },
+    email: { type: String, required: true, unique: true },
     weight: { type: Number, required: true },
     age: { type: Number, required: true },
     height: { type: Number },
