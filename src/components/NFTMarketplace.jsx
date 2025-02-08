@@ -15,35 +15,35 @@ const ITEMS = [
   },
   {
     id: 2,
-    image: "/api/placeholder/400/400",
+    image: "./1",
     price: 0.0500,
     likes: 341,
     type: "tshirt"
   },
   {
     id: 3,
-    image: "/api/placeholder/400/400",
+    image: "./2",
     price: 0.0500,
     likes: 341,
     type: "bottle"
   },
   {
     id: 4,
-    image: "/api/placeholder/400/400",
+    image: "./3",
     price: 0.0500,
     likes: 341,
     type: "nft"
   },
   {
     id: 5, 
-    image: "/api/placeholder/400/400",
+    image: "./5",
     price: 0.0500,
     likes: 341,
     type: "nft"
   },
   {
     id: 6,
-    image: "/api/placeholder/400/400",
+    image: "./6",
     price: 0.0500,
     likes: 341,
     type: "nft"
