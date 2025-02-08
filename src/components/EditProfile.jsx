@@ -1,9 +1,11 @@
 "use client"
 import React, { useState } from 'react';
 import { Camera } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const EditProfile = () => {
   const [imageHover, setImageHover] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
   const [formData, setFormData] = useState({
     displayName: '',
     fullName: '',
@@ -15,6 +17,7 @@ const EditProfile = () => {
     state: '',
     zipCode: ''
   });
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,15 +27,32 @@ const EditProfile = () => {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(URL.createObjectURL(file));
+      const data = new FormData();
+      data.append('profileImage', file);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSaving(true);
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       data.append(key, value);
     });
 
-    // Log all form data to the console
     console.log('Form Data:', Object.fromEntries(data.entries()));
+
+    if (profileImage) {
+      console.log('Profile Image:', profileImage);
+    }
+
+    setTimeout(() => {
+      setIsSaving(false);
+    }, 2000);
 
     // Call your API here with the FormData object
     // Example: axios.post('/api/endpoint', data)
@@ -41,7 +61,10 @@ const EditProfile = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="min-h-screen bg-transparent mx-auto w-full p-4 md:p-8 lg:p-12">
-        <div className="max-w-4xl mx-auto bg-slate-800/50 rounded-2xl p-6 md:p-8 lg:p-10 backdrop-blur-sm">
+        <motion.div
+          className={`max-w-4xl mx-auto bg-slate-800/50 rounded-2xl p-6 md:p-8 lg:p-10 backdrop-blur-sm ${isSaving ? 'outline outline-4 outline-green-400 animate-pulse' : ''}`}
+          transition={{ duration: 0.5 }}
+        >
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 text-center transition-all">
             EDIT PROFILE
           </h1>
@@ -49,22 +72,32 @@ const EditProfile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
             {/* Profile Image Section */}
             <div className="flex flex-col items-center space-y-4">
-              <div 
-                className="relative group"
-                onMouseEnter={() => setImageHover(true)}
-                onMouseLeave={() => setImageHover(false)}
-              >
-                <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-orange-400 transition-transform duration-300 ease-in-out transform hover:scale-105">
-                  <img
-                    src="/api/placeholder/400/400"
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+                id="profileImageInput"
+              />
+              <label htmlFor="profileImageInput" className="cursor-pointer">
+                <div className="relative group">
+                  <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-orange-400 transition-transform duration-300 ease-in-out transform hover:scale-105">
+                    <img
+                      src={profileImage || "/api/placeholder/400/400"}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className={`absolute inset-0 m-auto ${profileImage ? 'hidden' : 'flex'} items-center justify-center`}>
+                      <Camera className="w-5 h-5 text-orange-400 mr-1" />
+                      <span className="text-orange-400"> Upload Image</span>
+                    </div>
+                  </div>
+                  <div className={`absolute inset-0 bg-black/50  rounded-full flex items-center justify-center transition-opacity duration-300 ${imageHover ? 'opacity-100' : 'opacity-0'}`}>
+                    <Camera className="w-12 h-12 text-white" />
+                  </div>
                 </div>
-                <div className={`absolute inset-0 bg-black/50 rounded-full flex items-center justify-center transition-opacity duration-300 ${imageHover ? 'opacity-100' : 'opacity-0'}`}>
-                  <Camera className="w-12 h-12 text-white" />
-                </div>
-              </div>
+                
+              </label>
             </div>
 
             {/* Form Section */}
@@ -208,7 +241,7 @@ const EditProfile = () => {
               SAVE CHANGES
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </form>
   );
