@@ -19,8 +19,8 @@ export async function POST(req) {
         if (existingUser) return NextResponse.json({ error: "User already exists" }, { status: 400 });
         
         const data = await req.json();
-        if (!data.name || !data.age || !data.email) {
-            return NextResponse.json({ error: "Name, age, and email are required" }, { status: 400 });
+        if (!data.name || !data.age || !data.email || !data.password) {
+            return NextResponse.json({ error: "Name, age, password and email are required" }, { status: 400 });
         }
         const newUser = new User(data);
         await newUser.save();
