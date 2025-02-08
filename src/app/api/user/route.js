@@ -15,16 +15,32 @@ export async function GET(req) {
 export async function POST(req) {
     await dbConnect();
     try {
+        const data = await req.json();
         const existingUser = await User.findOne({ email: data.email });
         if (existingUser) return NextResponse.json({ error: "User already exists" }, { status: 400 });
-        
-        const data = await req.json();
         if (!data.name || !data.age || !data.email || !data.password) {
             return NextResponse.json({ error: "Name, age, password and email are required" }, { status: 400 });
         }
         const newUser = new User(data);
         await newUser.save();
         return NextResponse.json({ message: "User added successfully", user: newUser }, { status: 201 });
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+}
+
+export async function PUT(req) {
+    await dbConnect();
+    try {
+        const data = await req.json();
+        if (!data.email || !data.newPassword) {
+            return NextResponse.json({ error: "Email and new password are required" }, { status: 400 });
+        }
+        const user = await User.findOne({ email: data.email });
+        if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
+        user.password = data.newPassword;
+        await user.save();
+        return NextResponse.json({ message: "Password updated successfully" }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 400 });
     }

@@ -17,10 +17,7 @@ export async function dbConnect() {
     }
 
     if (!cached.promise) {
-        cached.promise = mongoose.connect(MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        }).then((mongoose) => {
+        cached.promise = mongoose.connect(MONGODB_URI, {}).then((mongoose) => {
             console.log("✅ Database connected successfully!");
             return mongoose;
         }).catch((err) => {
@@ -32,5 +29,4 @@ export async function dbConnect() {
     return cached.conn;
 }
 
-// 🔥 Force test connection on app start
 dbConnect().then(() => console.log("✅ MongoDB Test Connection Established!")).catch((err) => console.error("❌ MongoDB Test Connection Failed:", err));
