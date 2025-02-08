@@ -22,7 +22,7 @@ export default function ConnectWallet() {
   return (
     <div>
       <button onClick={connectWallet}>
-        {walletAddress ? null : ""}
+        {walletAddress ? null : "Connect Wallet"}
       </button>
     </div>
   );

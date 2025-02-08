@@ -127,7 +127,7 @@ const NFTMarketplace = () => {
               >
                 <Heart
                   className={`w-6 h-6 mr-8 transition-colors duration-300 ${
-                    likedItems.has(item.id) 
+                    likedItems.has(item.id)
                       ? 'text-red-500 fill-red-500' 
                       : 'text-white'
                   }`}
