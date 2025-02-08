@@ -67,8 +67,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <div 
             className="h-10 w-10 rounded-full overflow-hidden cursor-pointer" 
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <img
               src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
