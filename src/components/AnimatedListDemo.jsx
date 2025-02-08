@@ -20,7 +20,7 @@ const AnimatedListItem = ({ children }) => {
 };
 
 // AnimatedList Component
-const AnimatedList = React.memo(({ children, className = "", delay = 1000, ...props }) => {
+const AnimatedList = React.memo(({ children, className = "", delay = 20000, ...props }) => {
   const [index, setIndex] = useState(0);
   const childrenArray = useMemo(() => React.Children.toArray(children), [children]);
 
@@ -65,7 +65,7 @@ const Notification = ({ name, description, icon, color, time }) => {
         <div className="flex flex-col overflow-hidden">
           <figcaption className="flex flex-row items-center whitespace-pre text-lg font-medium dark:text-white">
             <span className="text-sm sm:text-lg">{name}</span>
-            <span className="mx-1">·</span>
+            <span className="mx-1">    </span>
             <span className="text-xs text-gray-500">{time}</span>
           </figcaption>
           <p className="text-sm font-normal dark:text-white/60">{description}</p>
@@ -78,32 +78,32 @@ const Notification = ({ name, description, icon, color, time }) => {
 // Sample notifications data
 const notifications = Array.from({ length: 10 }, () => [
   {
-    name: "Payment received",
-    description: "Magic UI",
-    time: "15m ago",
-    icon: "💸",
-    color: "#00C9A7",
-  },
-  {
-    name: "User signed up",
-    description: "Magic UI",
-    time: "10m ago",
-    icon: "👤",
-    color: "#FFB800",
-  },
-  {
-    name: "New message",
-    description: "Magic UI",
-    time: "5m ago",
-    icon: "💬",
+    name: "Bicep Curls",
+    description: "Grow them biceps!",
+    time: "      ",
+    icon: "💪",
     color: "#FF3D71",
   },
   {
-    name: "New event",
-    description: "Magic UI",
-    time: "2m ago",
-    icon: "🗞️",
-    color: "#1E86FF",
+    name: "Pushups",
+    description: "Get down Soldier!",
+    time: "      ",
+    icon: "💪",
+    color: "#FF3D71",
+  },
+  {
+    name: "Shoulder Press",
+    description: "You can Do It!",
+    time: "      ",
+    icon: "💪",
+    color: "#FF3D71",
+  },
+  {
+    name: "Squats",
+    description: "Grow them Quads!!",
+    time: "      ",
+    icon: "💪",
+    color: "#FF3D71",
   },
 ]).flat();
 

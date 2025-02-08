@@ -8,13 +8,13 @@ import AnimatedListDemo from '@/components/AnimatedListDemo';
 const page = () => {
     return (
         <>
-            <div className="flex mt-24 flex-col mx-auto">
-                <div className="mx-auto">
+            <div className="flex mt-24 w-full justify-center flex-col">
+                <div className="flex justify-center">
                     <CameraComponent />
                 </div>
 
-                <div className="flex">
-                    <div className="col-span-3 mx-auto -ml-9 scale-90 grid grid-cols-2 gap-4 p-4 bg-transparent">
+                <div className="flex justify-center w-full">
+                    <div className="col-span-3 -ml-9 scale-90 grid grid-cols-2 gap-4 p-4 bg-transparent">
                         <Fitness_stats
                             icon={Activity}
                             title="Workout"
