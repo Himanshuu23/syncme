@@ -15,7 +15,10 @@ const UserSchema = new mongoose.Schema({
     region: { type: String },
     state: { type: String },
     zipCode: { type: String },
-    profilePicture: { type: String }
+    profilePicture: { type: String },
+    level: { type: Number },
+    streaks: { type: Number },
+    amount: { type: Number, default: 0 }
 });
 
 const User = mongoose.models.User || mongoose.model("User", UserSchema);
