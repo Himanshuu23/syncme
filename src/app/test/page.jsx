@@ -12,6 +12,7 @@ export default function VoiceInterface() {
   const [isPaused, setIsPaused] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [audioData, setAudioData] = useState(new Array(20).fill(0));
+  const [stressLevel, setStressLevel] = useState("Unknown");
   const mediaRecorderRef = useRef(null);
   const audioContextRef = useRef(null);
   const analyzerRef = useRef(null);
@@ -24,7 +25,6 @@ export default function VoiceInterface() {
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
 
-      // Set up audio analysis
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
 
@@ -32,13 +32,24 @@ export default function VoiceInterface() {
         audioContext: audioContextRef.current,
         source: source,
         bufferSize: 1024,
-        featureExtractors: ["rms"],
+        featureExtractors: ["rms", "spectralCentroid"],
         callback: (features) => {
           if (features && features.rms) {
             setAudioData((prev) => {
               const newData = [...prev.slice(1), features.rms * 1000];
               return newData;
             });
+
+            const stressScore =
+              (features.rms || 0) * 50 + (features.spectralCentroid || 0) * 20;
+
+            setStressLevel(
+              stressScore > 70
+                ? "High Stress"
+                : stressScore > 40
+                ? "Moderate Stress"
+                : "Low Stress"
+            );
           }
         },
       });
@@ -110,11 +121,9 @@ export default function VoiceInterface() {
   return (
     <>
       <div className="text-white">
-      Hi, I am your AI assistant, IRIS 
-      Press the mic button to start chatting
+        Hi, I am your AI assistant, IRIS Press the mic button to start chatting
       </div>
       <div className="min-h-screen mt-7 mx-auto flex flex-col items-center justify-center p-4">
-        {/* Main Circle with Voice Visualization */}
         <motion.div
           className="relative w-64 h-64 rounded-full mb-8"
           style={{
@@ -124,12 +133,10 @@ export default function VoiceInterface() {
         >
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative w-48 h-48">
-              {/* Voice Visualization Waves */}
               <div className="absolute inset-0 flex items-center justify-center">
                 {audioData.map((value, index) => {
                   const waveHeight =
-                    Math.sin(index + (isRecording ? Date.now() / 100 : 0)) *
-                    800; // Adjust the multiplier for wave effect
+                    Math.sin(index + (isRecording ? Date.now() / 100 : 0)) * 800;
                   return (
                     <motion.div
                       key={index}
@@ -157,9 +164,7 @@ export default function VoiceInterface() {
           </div>
         </motion.div>
 
-        {/* Control Buttons */}
         <div className="flex items-center gap-8">
-          {/* Chat Button */}
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -169,7 +174,6 @@ export default function VoiceInterface() {
             <BsChatLeftText size={20} />
           </motion.button>
 
-          {/* Mic Button */}
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -180,7 +184,6 @@ export default function VoiceInterface() {
             <FaMicrophone size={24} />
           </motion.button>
 
-          {/* Close Button */}
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -191,19 +194,16 @@ export default function VoiceInterface() {
           </motion.button>
         </div>
 
-        {/* Transcript Display */}
         <AnimatePresence>
-          {transcript && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="mt-8 p-4 rounded-lg bg-opacity-20 bg-white backdrop-blur-lg text-white max-w-md"
-            >
-              <p className="text-lg">{transcript}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    className="mt-8 p-4 rounded-lg bg-opacity-20 bg-white backdrop-blur-lg text-white max-w-md"
+  >
+    <p className="text-lg text-white"><strong>Stress Level:</strong> {stressLevel}</p>
+  </motion.div>
+</AnimatePresence>
       </div>
     </>
   );
