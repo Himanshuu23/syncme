@@ -1,4 +1,4 @@
-import NFTMarketplace from "@/components/NFTMarketplace";
+import NFTMarketplace from '@/components/NFTMarketplace'
 
 export default function Shop() {
     return (

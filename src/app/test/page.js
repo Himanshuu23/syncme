@@ -99,7 +99,6 @@ export default function SpeechToText() {
         Stop Recording
       </button>
       <div className="mt-4">
-        <p><strong>Transcript:</strong> {transcript}</p>
         <p><strong>Stress Level:</strong> {stressLevel}</p>
       </div>
     </div>
