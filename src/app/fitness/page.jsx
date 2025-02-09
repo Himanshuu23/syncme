@@ -7,7 +7,48 @@ import { Activity, Flame, FootprintsIcon, BicepsFlexed } from "lucide-react";
 import Fitness_stats from "@/components/Fitness_stats";
 import AnimatedListDemo from "@/components/AnimatedListDemo";
 
+<<<<<<< HEAD
 const socket = io("http://localhost:6001");
+=======
+                <div className="flex justify-center ml-3 w-full">
+                    <div className="col-span-3 -ml-9 scale-90 grid grid-cols-2 gap-4 p-4 bg-transparent">
+                        <Fitness_stats
+                            icon={Activity}
+                            title="Workout"
+                            value="4 hrs"
+                            color="bg-cyan-500"
+                        />
+                        <Fitness_stats
+                            icon={Flame}
+                            title="Calories"
+                            value="1800 kcl"
+                            color="bg-orange-500"
+                        />
+                        <Fitness_stats
+                            icon={FootprintsIcon}
+                            title="rep Count"
+                            value="2200 steps"
+                            color="bg-purple-500"
+                        />
+                        <Fitness_stats
+                            icon={FootprintsIcon}
+                            title=""
+                            value="2200 steps"
+                            color="bg-purple-500"
+                        />
+                    </div>
+                    <div className="mt-6 ">
+                        <AnimatedListDemo />
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+>>>>>>> 7bd7af134272863b2949d72b019d55f22a8e7570
 
 const Page = () => {
   const [logs, setLogs] = useState([]);
