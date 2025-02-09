@@ -29,19 +29,22 @@ const page = () => {
                         />
                         <Fitness_stats
                             icon={FootprintsIcon}
-                            title="Steps"
+                            title="rep Count"
                             value="2200 steps"
                             color="bg-purple-500"
                         />
                         <Fitness_stats
                             icon={FootprintsIcon}
-                            title="Steps"
+                            title=""
                             value="2200 steps"
                             color="bg-purple-500"
                         />
                     </div>
                     <div className="mt-6 ">
                         <AnimatedListDemo />
+                    </div>
+                    <div>
+                        
                     </div>
                 </div>
             </div>
