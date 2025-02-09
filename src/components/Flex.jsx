@@ -13,5 +13,4 @@ const Flex = () => {
     </div>
   )
 }
-
 export default Flex

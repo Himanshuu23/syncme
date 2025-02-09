@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardContent } from '../components/ui/card';
 
 const Schedule = () => {
   const [isExpanded, setIsExpanded] = useState(false);
