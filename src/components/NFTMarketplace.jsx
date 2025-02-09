@@ -15,55 +15,39 @@ const ITEMS = [
   },
   {
     id: 2,
-<<<<<<< HEAD
-    image: "./1",
-=======
     image: "./spotify.jpg",
->>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
     type: "Spotify Premium"
   },
   {
     id: 3,
-<<<<<<< HEAD
     image: "./2",
-=======
     image: "./hoodie.jpg",
->>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
     type: "Customizable Hoodie"
   },
   {
     id: 4,
-<<<<<<< HEAD
     image: "./3",
-=======
     image: "./bootle.jpg",
->>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
     type: "Customizable Bottle"
   },
   {
     id: 5, 
-<<<<<<< HEAD
     image: "./5",
-=======
     image: "./mmt.jpg",
->>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
     type: "Make my Trip voucher"
   },
   {
     id: 6,
-<<<<<<< HEAD
     image: "./6",
-=======
     image: "./amazon.jpg",
->>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
     type: "Amazon Gift Voucher"
