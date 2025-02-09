@@ -11,42 +11,62 @@ const ITEMS = [
     image: "https://i.insider.com/5b2bf9281ae6621e008b46c1?width=700",
     price: 0.0500,
     likes: 341,
-    type: "hoodie"
+    type: "Netflix Voucher"
   },
   {
     id: 2,
+<<<<<<< HEAD
     image: "./1",
+=======
+    image: "./spotify.jpg",
+>>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
-    type: "tshirt"
+    type: "Spotify Premium"
   },
   {
     id: 3,
+<<<<<<< HEAD
     image: "./2",
+=======
+    image: "./hoodie.jpg",
+>>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
-    type: "bottle"
+    type: "Customizable Hoodie"
   },
   {
     id: 4,
+<<<<<<< HEAD
     image: "./3",
+=======
+    image: "./bootle.jpg",
+>>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
-    type: "nft"
+    type: "Customizable Bottle"
   },
   {
     id: 5, 
+<<<<<<< HEAD
     image: "./5",
+=======
+    image: "./mmt.jpg",
+>>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
-    type: "nft"
+    type: "Make my Trip voucher"
   },
   {
     id: 6,
+<<<<<<< HEAD
     image: "./6",
+=======
+    image: "./amazon.jpg",
+>>>>>>> e49ad6ffe8909a61c41ce98034de3382325ce029
     price: 0.0500,
     likes: 341,
-    type: "nft"
+    type: "Amazon Gift Voucher"
   }
 ];
 const SHOP_CONTRACT_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
@@ -141,6 +161,7 @@ const NFTMarketplace = () => {
             <div className="p-4">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-white align-center font-sans font-medium">{item.price} ETH</span>
+                <span className="text-white align-center font-sans font-medium">{item.type}</span>
               </div>
               <ConnectWallet />
               <button onClick={() => buyProduct(1, item.price)} className="w-full bg-orange-500 text-white py-3 px-4 rounded-md font-medium transition-all duration-300 hover:bg-orange-600 active:scale-95">

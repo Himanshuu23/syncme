@@ -12,12 +12,12 @@ import { FiTrendingUp, FiLogOut, FiHelpCircle } from 'react-icons/fi';
 const Sidebar = ({ isOpen, setIsOpen }) => {
   // Top menu items (displayed at the top of the sidebar)
   const topMenuItems = [
-    { icon: <AiOutlineDashboard />, label: 'Overview', path: '/overview' },
+    { icon: <AiOutlineDashboard />, label: 'Overview', path: '/' },
     { icon: <AiOutlineBook />, label: 'Daily Diary', path: '/diary' },
     { icon: <GiMeal />, label: 'Diet Plan', path: '/diet' },
-    { icon: <FaBullseye />, label: 'Goals', path: '/goals' },
+    { icon: <FaBullseye />, label: 'Fitness Tracker', path: '/fitness' },
     { icon: <AiOutlineCalendar />, label: 'My Schedule', path: '/schedule' },
-    { icon: <FiTrendingUp />, label: 'Progress', path: '/progress' }
+    { icon: <FiTrendingUp />, label: 'Shop', path: '/shop' }
   ];
 
   // Bottom menu items (Logout and Help will be shown at the bottom)
