@@ -3,10 +3,21 @@
 import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { Check, ChevronDown, ChevronUp } from "lucide-react"
+import { clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-import { cn } from "@/lib/utils"
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
 
-const Select = SelectPrimitive.Root
+const Select = React.forwardRef(({ className, ...props }, ref) => (
+  <SelectPrimitive.Root
+    ref={ref}
+    className={cn(className)}
+    {...props}
+  />
+))
+Select.displayName = SelectPrimitive.Root.displayName
 
 const SelectGroup = SelectPrimitive.Group
 
