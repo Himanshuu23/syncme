@@ -1,4 +1,6 @@
-import NFTMarketplace from "@/components/NFTMarketplace";
+"use client"
+import React from 'react';
+import NFTMarketplace from '@/components/NFTMarketplace';
 
 export default function Shop() {
     return (
